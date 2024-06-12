@@ -4,7 +4,7 @@ import { config } from "dotenv";
 config();
 
 export const ListarUsuario = (req, res) => {
-    const url = `http://localhost:1500/api/users`; 
+    const url = `https://proyecto-hs90.onrender.com/api/users`; 
 
     let token = req.cookies.token;
 

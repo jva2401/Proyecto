@@ -2,7 +2,7 @@
 const EliminaRegistro = (event) => {
     let codigo = event.target.parentElement.parentElement.children[0].innerHTML;
 
-    const url = `http://localhost:1500/api/users/${codigo}`;
+    const url = `https://proyecto-hs90.onrender.com/api/users/${codigo}`;
 
     axios.delete(url)
     .then(response => {
@@ -38,7 +38,7 @@ const GuardarCambios = (event) => {
     const nombre = document.getElementById('editUserName').value;
     const email = document.getElementById('editUserEmail').value;
 
-    const url = `http://localhost:1500/api/users/${id}`;
+    const url = `https://proyecto-hs90.onrender.com/api/users/${id}`;
 
     let token = "";
     const cookieToken = document.cookie;
@@ -86,7 +86,7 @@ const GuardarUsuario = () => {
     const password = document.getElementById('password').value;
     const rol = document.getElementById('rol').value;
 
-    const url = "http://localhost:1500/api/users";
+    const url = "https://proyecto-hs90.onrender.com/api/users";
 
     let token = "";
     const cookieToken = document.cookie;
@@ -133,7 +133,7 @@ const GuardarUsuario = () => {
 const EliminaClientRegistro = (event) => {
     let codigo = event.target.parentElement.parentElement.children[0].innerHTML;
 
-    const url = `http://localhost:1500/api/clients/${codigo}`;
+    const url = `https://proyecto-hs90.onrender.com/api/clients/${codigo}`;
 
     axios.delete(url)
     .then(response => {
@@ -175,7 +175,7 @@ const GuardarCambiosClient = (event) => {
     const telefono = document.getElementById('editTelefono').value;
     const email = document.getElementById('editUserEmail').value;
 
-    const url = `http://localhost:1500/api/clients/${id}`;
+    const url = `https://proyecto-hs90.onrender.com/api/clients/${id}`;
 
     let token = "";
     const cookieToken = document.cookie;
@@ -223,7 +223,7 @@ const GuardarCliente = () => {
     const telefono = document.getElementById('telefonoClient').value;
     const email = document.getElementById('correoClient').value;
 
-    const url = "http://localhost:1500/api/clients";
+    const url = "https://proyecto-hs90.onrender.com/api/clients";
 
     let token = "";
     const cookieToken = document.cookie;

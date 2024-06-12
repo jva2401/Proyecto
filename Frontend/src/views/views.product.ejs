@@ -72,7 +72,7 @@ function guardarCambios(event) {
     const precio_unitario = document.getElementById('editProductoPrecio').value;
     const stock = document.getElementById('editProductoStock').value;
 
-    fetch(`http://localhost:1500/api/products/${id}`, {
+    fetch(`https://proyecto-hs90.onrender.com/api/products/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ function guardarCambios(event) {
 }
 
 function eliminarProducto(id) {
-    fetch(`http://localhost:1500/api/products/${id}`, {
+    fetch(`https://proyecto-hs90.onrender.com/api/products/${id}`, {
         method: 'DELETE'
     })
     .then(response => {

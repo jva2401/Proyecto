@@ -1,7 +1,7 @@
 const logueese = () => {
     const correo = document.getElementById("correo");
     const contrasena = document.getElementById("contrasena");
-    let url = "http://localhost:1500/api/auth/login";
+    let url = "https://proyecto-hs90.onrender.com/api/auth/login";
     
     let option = {
       method: "POST",
@@ -44,7 +44,7 @@ const logueese = () => {
 //       })
 //   };
 
-//   let url = "http://localhost:1500/api/auth/login";
+//   let url = "https://proyecto-hs90.onrender.com/api/auth/login";
 
 //   fetch(url, option)
 //       .then(res => {
