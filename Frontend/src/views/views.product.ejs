@@ -1,0 +1,102 @@
+<%- include("partials/partials.dash.header.ejs") %>
+<div class="content">
+    <h1><%= titulo %></h1>
+    <div class="container">
+        <table border="5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio Unitario</th>
+                    <th>Stock</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(function(producto) { %>
+                <tr id="producto-<%= producto._id %>">
+                    <td><%= producto._id %></td>
+                    <td><%= producto.nombre %></td>
+                    <td><%= producto.descripcion %></td>
+                    <td><%= producto.precio_unitario %></td>
+                    <td><%= producto.stock %></td>
+                    <td>
+                        <button class="modificarProducto" onclick="showEditForm('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.descripcion %>', '<%= producto.precio_unitario %>', '<%= producto.stock %>')">Modificar</button>
+                        <button class="eliminar" onclick="eliminarProducto('<%= producto._id %>')">Eliminar</button>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para editar -->
+    <div id="editForm" style="display:none;">
+        <h2>Editar Producto</h2>
+        <form id="formEditProducto" onsubmit="guardarCambios(event)">
+            <input type="hidden" id="editProductoId">
+            <label for="editProductoNombre">Nombre:</label>
+            <input type="text" id="editProductoNombre" required>
+            <label for="editProductoDescripcion">Descripción:</label>
+            <input type="text" id="editProductoDescripcion" required>
+            <label for="editProductoPrecio">Precio Unitario:</label>
+            <input type="number" id="editProductoPrecio" required>
+            <label for="editProductoStock">Stock:</label>
+            <input type="number" id="editProductoStock" required>
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" onclick="closeEditForm()">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function showEditForm(id, nombre, descripcion, precio_unitario, stock) {
+    document.getElementById('editForm').style.display = 'block';
+    document.getElementById('editProductoId').value = id;
+    document.getElementById('editProductoNombre').value = nombre;
+    document.getElementById('editProductoDescripcion').value = descripcion;
+    document.getElementById('editProductoPrecio').value = precio_unitario;
+    document.getElementById('editProductoStock').value = stock;
+}
+
+function closeEditForm() {
+    document.getElementById('editForm').style.display = 'none';
+}
+
+function guardarCambios(event) {
+    event.preventDefault();
+    const id = document.getElementById('editProductoId').value;
+    const nombre = document.getElementById('editProductoNombre').value;
+    const descripcion = document.getElementById('editProductoDescripcion').value;
+    const precio_unitario = document.getElementById('editProductoPrecio').value;
+    const stock = document.getElementById('editProductoStock').value;
+
+    fetch(`http://localhost:1500/api/products/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre, descripcion, precio_unitario, stock })
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function eliminarProducto(id) {
+    fetch(`http://localhost:1500/api/products/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+<%- include("partials/partials.dash.footer.ejs") %>

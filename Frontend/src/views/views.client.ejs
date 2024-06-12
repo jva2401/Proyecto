@@ -1,0 +1,57 @@
+<%- include("partials/partials.dash.header.ejs") %>
+
+<section class="content">
+    <h1><%= titulo %></h1>
+    <h1>Registros de Clientes</h1>
+    <div class="container">
+        <table border="5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(function(registroClient) { %>
+                <tr id="client-<%= registroClient._id %>">
+                    <td><%= registroClient._id %></td>
+                    <td><%= registroClient.nombre %></td>
+                    <td><%= registroClient.direccion %></td>
+                    <td><%= registroClient.telefono %></td>
+                    <td><%= registroClient.email %></td>
+                    <td>
+                        <button class="modificarRegristroClient" onclick="showEditClientForm('<%= registroClient._id %>')">Modificar</button>
+                        <button class="eliminarRegristroClient" onclick="EliminaClientRegistro(event)">Eliminar</button>
+                        
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para editar -->
+    <div id="editClientForm" style="display:none;">
+        <h2>Editar Cliente</h2>
+        <form id="formEditClient" onsubmit="GuardarCambiosClient(event)">
+            <input type="hidden" id="editClientId">
+            <label for="editClientName">Nombre:</label>
+            <input type="text" class="form-control" id="editClientName" placeholder="Ingrese el Nombre" required>
+            <label for="editDirrecion">Dirección:</label>
+            <input type="text" class="form-control" id="editDirrecion" placeholder="Ingrese la Dirección" required>
+            <label for="editTelefono">Teléfono:</label>
+            <input type="text" class="form-control" id="editTelefono" placeholder="Ingrese el Teléfono" required>
+            <label for="editUserEmail">Correo:</label>
+            <input type="email" class="form-control" id="editUserEmail" placeholder="Ingrese su Correo" required>
+            <button type="submit" class="btn btn-app"><i class="fa fa-save"></i> Guardar Cambios</button>
+            <button type="button" class="btn btn-app" onclick="closeEditClientForm()">Cancelar</button>
+        </form>
+    </div>
+
+</section>
+
+<%- include("partials/partials.dash.footer.ejs") %>
